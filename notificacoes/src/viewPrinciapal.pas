@@ -29,7 +29,6 @@ type
   private
 
     FNotificacaoFactory: INotificacaoFactory;
-    FNotificacao: INotificacao;
   end;
 
 var
@@ -51,22 +50,22 @@ end;
 
 procedure TForm1.Panel3Click(Sender: TObject);
 begin
-  TNotificacaoFactory.New.Informacao('Uma informação');
+  FNotificacaoFactory.Informacao('Uma informação');
 end;
 
 procedure TForm1.Panel4Click(Sender: TObject);
 begin
-  TNotificacaoFactory.New.Sucesso('Cadastrado com sucesso!');
+  FNotificacaoFactory.Sucesso('Cadastrado com sucesso!');
 end;
 
 procedure TForm1.Panel5Click(Sender: TObject);
 begin
-  TNotificacaoFactory.New.Warning('Tome cuidado');
+  FNotificacaoFactory.Warning('Tome cuidado');
 end;
 
 procedure TForm1.Panel6Click(Sender: TObject);
 begin
-  TNotificacaoFactory.New.Erro('Deu Erro');
+  FNotificacaoFactory.Erro('Deu Erro');
 end;
 
 end.

@@ -64,6 +64,7 @@
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
+        <DCC_DcuOutput>.\$(Platform)\$(Config)\dcu</DCC_DcuOutput>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1)'!=''">
         <DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
@@ -89,6 +90,8 @@
     <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <VerInfo_Locale>1033</VerInfo_Locale>
     </PropertyGroup>
     <ItemGroup>
         <DelphiCompile Include="$(MainSource)">
@@ -100,7 +103,6 @@
         <DCCReference Include="..\src\notificacoes\impl\Notificacoes.Notificacoes.Impl.Notificacao.pas">
             <Form>Notificacao</Form>
         </DCCReference>
-        <DCCReference Include="..\src\eventos\Notificacoes.Eventos.EventosUtils.pas"/>
         <DCCReference Include="..\src\notificacoes\Notificacoes.Notificacoes.Notificacao.pas"/>
         <DCCReference Include="..\src\notificacoes\Notificacoes.Notificacoes.NotificacaoFactory.pas"/>
         <DCCReference Include="..\src\notificacoes\impl\Notificacoes.Notificacoes.Impl.NotificacaoFactory.pas"/>

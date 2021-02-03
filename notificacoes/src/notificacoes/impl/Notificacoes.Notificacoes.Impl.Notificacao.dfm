@@ -54,7 +54,7 @@ object Notificacao: TNotificacao
   end
   object TempoEmTela: TTimer
     Enabled = False
-    Interval = 3000
+    Interval = 4000
     OnTimer = TempoEmTelaTimer
     Left = 320
     Top = 16

@@ -12,7 +12,6 @@ type
   TNotificacaoFactory = class(TInterfacedObject, INotificacaoFactory)
   private
     FNotificacoes: TList<INotificacao>;
-    FNotificacao: INotificacao;
   public
     constructor Create;
     destructor Destroy; override;
@@ -27,7 +26,6 @@ type
     procedure AdicionarNotificacao(const Notificacao: INotificacao);
     procedure RemoverNotificacao(const Notificacao: INotificacao);
     procedure Notificar;
-    procedure Exibir;
   end;
 
 const
@@ -45,11 +43,6 @@ const
 
 implementation
 
-procedure TNotificacaoFactory.AdicionarNotificacao(const Notificacao: INotificacao);
-begin
-  FNotificacoes.Add(Notificacao);
-end;
-
 constructor TNotificacaoFactory.Create;
 begin
   FNotificacoes := TList<INotificacao>.Create;
@@ -66,17 +59,9 @@ begin
   Result := Self.Create;
 end;
 
-procedure TNotificacaoFactory.Notificar;
-var
-  Notificacao: INotificacao;
-  Quantidade: Integer;
+procedure TNotificacaoFactory.AdicionarNotificacao(const Notificacao: INotificacao);
 begin
-  Quantidade := FNotificacoes.Count;
-  for Notificacao in FNotificacoes do
-  begin
-    Notificacao.AtualizarPosicao;
-  end;
-
+  FNotificacoes.Add(Notificacao);
 end;
 
 procedure TNotificacaoFactory.RemoverNotificacao(const Notificacao: INotificacao);
@@ -84,42 +69,69 @@ begin
   FNotificacoes.Delete(FNotificacoes.IndexOf(Notificacao));
 end;
 
+procedure TNotificacaoFactory.Notificar;
+var
+  Notificacao: INotificacao;
+begin
+  for Notificacao in FNotificacoes do
+  begin
+    Notificacao.AtualizarPosicao;
+  end;
+end;
+
 procedure TNotificacaoFactory.Dark(const Mensagem: string);
 var
-  NotificacaoDarck: INotificacao;
+  Notificacao: INotificacao;
 begin
-  NotificacaoDarck := TNotificacao.New;
-  AdicionarNotificacao(NotificacaoDarck);
-
-  NotificacaoDarck.Mensagem(Mensagem).Icone(ICONE_NENHUM).Cor(COR_PRETO).Exibir;
-
+  Notificacao := TNotificacao.New;
+  AdicionarNotificacao(Notificacao);
+  Notificacao.OnRemoverDaLista := RemoverNotificacao;
+  Notificacao.Mensagem(Mensagem).Icone(ICONE_NENHUM).Cor(COR_PRETO).Exibir;
   Notificar;
 end;
 
 procedure TNotificacaoFactory.Erro(const Mensagem: string);
+var
+  Notificacao: INotificacao;
 begin
-  TNotificacao.New.Mensagem(Mensagem).Icone(ICONE_ERRO).Cor(COR_VERMELHO).Exibir;
-end;
-
-procedure TNotificacaoFactory.Exibir;
-begin
-  FNotificacao.Exibir;
+  Notificacao := TNotificacao.New;
+  AdicionarNotificacao(Notificacao);
+  Notificacao.OnRemoverDaLista := RemoverNotificacao;
+  Notificacao.Mensagem(Mensagem).Icone(ICONE_ERRO).Cor(COR_VERMELHO).Exibir;
   Notificar;
 end;
 
 procedure TNotificacaoFactory.Informacao(const Mensagem: string);
+var
+  Notificacao: INotificacao;
 begin
-  TNotificacao.New.Mensagem(Mensagem).Icone(ICONE_INFORMACAO).Cor(COR_AZUL).Exibir;
+  Notificacao := TNotificacao.New;
+  AdicionarNotificacao(Notificacao);
+  Notificacao.OnRemoverDaLista := RemoverNotificacao;
+  Notificacao.Mensagem(Mensagem).Icone(ICONE_INFORMACAO).Cor(COR_AZUL).Exibir;
+  Notificar;
 end;
 
 procedure TNotificacaoFactory.Sucesso(const Mensagem: string);
+var
+  Notificacao: INotificacao;
 begin
-  TNotificacao.New.Mensagem(Mensagem).Icone(ICONE_SUCESSO).Cor(COR_VERDE).Exibir;
+  Notificacao := TNotificacao.New;
+  AdicionarNotificacao(Notificacao);
+  Notificacao.OnRemoverDaLista := RemoverNotificacao;
+  Notificacao.Mensagem(Mensagem).Icone(ICONE_SUCESSO).Cor(COR_VERDE).Exibir;
+  Notificar;
 end;
 
 procedure TNotificacaoFactory.Warning(const Mensagem: string);
+var
+  Notificacao: INotificacao;
 begin
-  TNotificacao.New.Mensagem(Mensagem).Icone(ICONE_WARNING).Cor(COR_LARANJA).Exibir;
+  Notificacao := TNotificacao.New;
+  AdicionarNotificacao(Notificacao);
+  Notificacao.OnRemoverDaLista := RemoverNotificacao;
+  Notificacao.Mensagem(Mensagem).Icone(ICONE_WARNING).Cor(COR_LARANJA).Exibir;
+  Notificar;
 end;
 
 end.

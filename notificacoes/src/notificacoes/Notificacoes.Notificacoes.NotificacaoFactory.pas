@@ -18,7 +18,6 @@ type
     procedure AdicionarNotificacao(const Notificacao: INotificacao);
     procedure RemoverNotificacao(const Notificacao: INotificacao);
     procedure Notificar;
-    procedure Exibir;
 
   end;
 

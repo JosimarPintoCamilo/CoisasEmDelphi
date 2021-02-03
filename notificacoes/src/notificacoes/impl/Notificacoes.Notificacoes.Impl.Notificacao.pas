@@ -8,11 +8,7 @@ uses
 
   Vcl.ExtCtrls,
 
-  EventBus,
-  EventBus.Subscribers,
-
-  Notificacoes.Notificacoes.Notificacao,
-  Notificacoes.Eventos.EventosUtils;
+  Notificacoes.Notificacoes.Notificacao;
 
 type
 
@@ -28,25 +24,22 @@ type
     FCodigoIcone: Integer;
     FCor: TColor;
     FMensagem: string;
+    FOnRemoverDaLista: TRemoverDaLista;
 
+    procedure SetOnRemoverDaLista(const Value: TRemoverDaLista);
     procedure DefinirPosicaoInicialDoAlerta;
     procedure IniciarTimer;
 
-    procedure RemoverAlertaParaDireita;
-
   public
+    class function New: INotificacao;
 
-//    [Subscribe]
-    procedure AtualizarTopAlert(Evento: IAtualizarTopNotificacao);
-
-    procedure RegistrarClasseParaReceberEventos;
     function Mensagem(const Mensagen: string): INotificacao;
     function Icone(const CodigoIcone: Integer): INotificacao;
     function Cor(const Cor: TColor): INotificacao;
-    class function New: INotificacao;
 
     procedure AtualizarPosicao;
     procedure Exibir;
+    property OnRemoverDaLista: TRemoverDaLista write SetOnRemoverDaLista;
   end;
 
 implementation
@@ -56,20 +49,6 @@ implementation
 procedure TNotificacao.FormCreate(Sender: TObject);
 begin
   DefinirPosicaoInicialDoAlerta;
-
-  IniciarTimer;
-
-  RegistrarClasseParaReceberEventos;
-end;
-
-procedure TNotificacao.AtualizarPosicao;
-begin
-  Self.Top := Self.Top + Self.Height + 10;
-end;
-
-procedure TNotificacao.AtualizarTopAlert(Evento: IAtualizarTopNotificacao);
-begin
-  Self.Top := Self.Top + Self.Height + 10;
 end;
 
 function TNotificacao.Cor(const Cor: TColor): INotificacao;
@@ -79,29 +58,11 @@ begin
   Self.Color := FCor;
 end;
 
-procedure TNotificacao.DefinirPosicaoInicialDoAlerta;
-begin
-  Self.Position := PoDesigned;
-  Self.Top := Screen.PrimaryMonitor.Top; // - Self.Height;
-  Self.Left := Screen.PrimaryMonitor.Width - Self.Width - 10;
-end;
-
-procedure TNotificacao.Exibir;
-begin
-  Self.Show;
-//  GlobalEventBus.Post(TAtualizarTopNotificacao.Create);
-end;
-
 function TNotificacao.Icone(const CodigoIcone: Integer): INotificacao;
 begin
   Result := Self;
   FCodigoIcone := CodigoIcone;
   LIcone.Caption := WideChar(FCodigoIcone);
-end;
-
-procedure TNotificacao.IniciarTimer;
-begin
-  TempoEmTela.Enabled := True;
 end;
 
 function TNotificacao.Mensagem(const Mensagen: string): INotificacao;
@@ -111,32 +72,44 @@ begin
   LMensagem.Caption := FMensagem;
 end;
 
+procedure TNotificacao.DefinirPosicaoInicialDoAlerta;
+begin
+  Self.Position := PoDesigned;
+  Self.Top := Screen.PrimaryMonitor.Top - Self.Height;
+  Self.Left := Screen.PrimaryMonitor.Width - Self.Width - 10;
+end;
+
+procedure TNotificacao.Exibir;
+begin
+  Self.Show;
+  IniciarTimer;
+end;
+
+procedure TNotificacao.IniciarTimer;
+begin
+  TempoEmTela.Enabled := True;
+end;
+
+procedure TNotificacao.TempoEmTelaTimer(Sender: TObject);
+begin
+  if Assigned(FOnRemoverDaLista) then
+    FOnRemoverDaLista(Self);
+  Free;
+end;
+
+procedure TNotificacao.AtualizarPosicao;
+begin
+  Self.Top := Self.Top + Self.Height + 10;
+end;
+
 class function TNotificacao.New: INotificacao;
 begin
   Result := Self.Create(nil);
 end;
 
-procedure TNotificacao.RegistrarClasseParaReceberEventos;
+procedure TNotificacao.SetOnRemoverDaLista(const Value: TRemoverDaLista);
 begin
-//  GlobalEventBus.RegisterSubscriberForEvents(Self);
-end;
-
-procedure TNotificacao.TempoEmTelaTimer(Sender: TObject);
-begin
-//  RemoverAlertaParaDireita;
-
-  // TEventBus.GetDefault.Unregister(Self);
-  // Free;
-end;
-
-procedure TNotificacao.RemoverAlertaParaDireita;
-var
-  I: Byte;
-begin
-  for I := 1 to Self.Width do
-  begin
-    Self.Left := Self.Left + I;
-  end;
+  FOnRemoverDaLista := Value;
 end;
 
 end.

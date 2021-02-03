@@ -7,34 +7,37 @@
 </h3>
 
 #### Requisitos:
-- Ter baixado o [EventBus](https://github.com/spinettaro/delphi-event-bus) 
-- Referenciar o EventBus no seu Delphi
+- Não tem dependências, só o Delphi é suficiente para rodar o projeto, seja livre :)
 
 #### Como utilizar:
 
-Importe a unit Notificacoes.Notificacoes.Impl.NotificacaoFactory
-
-Exiba a mensagem que quiser:
-
-``` 
-TNotificacaoFactory.New.Dark('Mensagem Dark');
+Instancie uma fábrica de notificações:
+```
+FNotificacaoFactory: INotificacaoFactory;
+FNotificacaoFactory := TNotificacaoFactory.New;
 ```
 
-``` 
-TNotificacaoFactory.New.Informacao('Uma informação');
+Crie a notificação que quiser :)
+
 ```
+FNotificacaoFactory.Dark('Mensagem Dark');
+``` 
 
 ``` 
-TNotificacaoFactory.New.Sucesso('Cadastrado com sucesso!');
-```
+FNotificacaoFactory.Informacao('Contribua com esse projeto!');
+``` 
 
 ``` 
-TNotificacaoFactory.New.Warning('Tome cuidado');
-```
+FNotificacaoFactory.Sucesso('Parabéns!');
+``` 
 
 ``` 
-TNotificacaoFactory.New.Erro('Deu Erro');
-```
+FNotificacaoFactory.Warning('Tome cuidado.');
+``` 
+
+``` 
+FNotificacaoFactory.Erro('Deu Erro!');
+``` 
 
 #### Se preferir personalise o seu balão utilizando a classe TNotificacao encadeando os métodos
 
