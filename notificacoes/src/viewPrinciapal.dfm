@@ -12,6 +12,7 @@ object Form1: TForm1
   Font.Style = []
   OldCreateOrder = False
   WindowState = wsMaximized
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel
@@ -36,10 +37,6 @@ object Form1: TForm1
     ShowHint = False
     TabOrder = 0
     StyleElements = []
-    ExplicitLeft = 96
-    ExplicitTop = 56
-    ExplicitWidth = 241
-    ExplicitHeight = 393
     DesignSize = (
       460
       515)

@@ -13,8 +13,8 @@ type
     function Icone(const CodigoIcone: Integer): INotificacao;
     function Cor(const Cor: TColor): INotificacao;
 
+    procedure AtualizarPosicao;
     procedure Exibir;
-
   end;
 
 implementation

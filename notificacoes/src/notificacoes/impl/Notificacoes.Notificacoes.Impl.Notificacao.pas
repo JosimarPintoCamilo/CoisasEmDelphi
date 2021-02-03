@@ -9,7 +9,7 @@ uses
   Vcl.ExtCtrls,
 
   EventBus,
-  EventBus.Attributes,
+  EventBus.Subscribers,
 
   Notificacoes.Notificacoes.Notificacao,
   Notificacoes.Eventos.EventosUtils;
@@ -31,19 +31,21 @@ type
 
     procedure DefinirPosicaoInicialDoAlerta;
     procedure IniciarTimer;
-    procedure RegistrarClasseParaReceberEventos;
+
     procedure RemoverAlertaParaDireita;
 
   public
 
-    [Subscribe]
-    procedure AtualizarTopAlert(Evento: TAtualizarTopAlert);
+//    [Subscribe]
+    procedure AtualizarTopAlert(Evento: IAtualizarTopNotificacao);
 
+    procedure RegistrarClasseParaReceberEventos;
     function Mensagem(const Mensagen: string): INotificacao;
     function Icone(const CodigoIcone: Integer): INotificacao;
     function Cor(const Cor: TColor): INotificacao;
     class function New: INotificacao;
 
+    procedure AtualizarPosicao;
     procedure Exibir;
   end;
 
@@ -60,9 +62,13 @@ begin
   RegistrarClasseParaReceberEventos;
 end;
 
-procedure TNotificacao.AtualizarTopAlert(Evento: TAtualizarTopAlert);
+procedure TNotificacao.AtualizarPosicao;
 begin
-  Evento.Free;
+  Self.Top := Self.Top + Self.Height + 10;
+end;
+
+procedure TNotificacao.AtualizarTopAlert(Evento: IAtualizarTopNotificacao);
+begin
   Self.Top := Self.Top + Self.Height + 10;
 end;
 
@@ -76,14 +82,14 @@ end;
 procedure TNotificacao.DefinirPosicaoInicialDoAlerta;
 begin
   Self.Position := PoDesigned;
-  Self.Top := Screen.PrimaryMonitor.Top - Self.Height;
+  Self.Top := Screen.PrimaryMonitor.Top; // - Self.Height;
   Self.Left := Screen.PrimaryMonitor.Width - Self.Width - 10;
 end;
 
 procedure TNotificacao.Exibir;
 begin
   Self.Show;
-  TEventBus.GetDefault.Post(TAtualizarTopAlert.Create);
+//  GlobalEventBus.Post(TAtualizarTopNotificacao.Create);
 end;
 
 function TNotificacao.Icone(const CodigoIcone: Integer): INotificacao;
@@ -112,15 +118,15 @@ end;
 
 procedure TNotificacao.RegistrarClasseParaReceberEventos;
 begin
-  TEventBus.GetDefault.RegisterSubscriber(Self);
+//  GlobalEventBus.RegisterSubscriberForEvents(Self);
 end;
 
 procedure TNotificacao.TempoEmTelaTimer(Sender: TObject);
 begin
-  RemoverAlertaParaDireita;
+//  RemoverAlertaParaDireita;
 
-  TEventBus.GetDefault.Unregister(Self);
-  Free;
+  // TEventBus.GetDefault.Unregister(Self);
+  // Free;
 end;
 
 procedure TNotificacao.RemoverAlertaParaDireita;

@@ -5,7 +5,11 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls,
-  Vcl.ExtCtrls;
+  Vcl.ExtCtrls,
+
+  Notificacoes.Notificacoes.Notificacao,
+  Notificacoes.Notificacoes.NotificacaoFactory,
+  Notificacoes.Notificacoes.Impl.NotificacaoFactory;
 
 type
   TForm1 = class(TForm)
@@ -15,11 +19,17 @@ type
     Panel4: TPanel;
     Panel5: TPanel;
     Panel6: TPanel;
+    procedure FormCreate(Sender: TObject);
     procedure Panel2Click(Sender: TObject);
     procedure Panel3Click(Sender: TObject);
     procedure Panel4Click(Sender: TObject);
     procedure Panel5Click(Sender: TObject);
     procedure Panel6Click(Sender: TObject);
+
+  private
+
+    FNotificacaoFactory: INotificacaoFactory;
+    FNotificacao: INotificacao;
   end;
 
 var
@@ -27,14 +37,16 @@ var
 
 implementation
 
-uses
-  Notificacoes.Notificacoes.Impl.NotificacaoFactory;
-
 {$R *.dfm}
+
+procedure TForm1.FormCreate(Sender: TObject);
+begin
+  FNotificacaoFactory := TNotificacaoFactory.New;
+end;
 
 procedure TForm1.Panel2Click(Sender: TObject);
 begin
-  TNotificacaoFactory.New.Dark('Mensagem Dark');
+  FNotificacaoFactory.Dark('Teessssssssste');
 end;
 
 procedure TForm1.Panel3Click(Sender: TObject);

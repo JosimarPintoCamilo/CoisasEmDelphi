@@ -41,7 +41,7 @@ object Notificacao: TNotificacao
     Left = 31
     Top = 20
     Width = 84
-    Height = 29
+    Height = 27
     Margins.Left = 10
     Alignment = taCenter
     Caption = 'LIcone'
