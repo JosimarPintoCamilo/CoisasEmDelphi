@@ -1,6 +1,7 @@
 object Notificacao: TNotificacao
   Left = 781
   Top = 0
+  Cursor = crHandPoint
   BorderStyle = bsNone
   Caption = 'Notificacao'
   ClientHeight = 70
@@ -14,6 +15,8 @@ object Notificacao: TNotificacao
   OldCreateOrder = False
   Position = poDesigned
   OnCreate = FormCreate
+  OnMouseEnter = FormMouseEnter
+  OnMouseLeave = FormMouseLeave
   PixelsPerInch = 96
   TextHeight = 13
   object LMensagem: TLabel
@@ -22,6 +25,7 @@ object Notificacao: TNotificacao
     Top = 20
     Width = 371
     Height = 47
+    Cursor = crHandPoint
     Margins.Left = 10
     Margins.Top = 20
     Align = alClient
@@ -34,11 +38,13 @@ object Notificacao: TNotificacao
     Font.Style = []
     ParentFont = False
     StyleElements = []
+    OnMouseEnter = FormMouseEnter
+    OnMouseLeave = FormMouseLeave
     ExplicitWidth = 108
     ExplicitHeight = 25
   end
   object LIcone: TLabel
-    Left = 31
+    Left = 23
     Top = 20
     Width = 84
     Height = 27

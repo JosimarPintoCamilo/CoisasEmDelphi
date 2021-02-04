@@ -1,4 +1,4 @@
-unit Notificacoes.Notificacoes.Impl.Notificacao;
+unit Delphi.Notificacoes.Impl.Notificacao;
 
 interface
 
@@ -8,7 +8,7 @@ uses
 
   Vcl.ExtCtrls,
 
-  Notificacoes.Notificacoes.Notificacao;
+  Delphi.Notificacoes.Notificacao;
 
 type
 
@@ -17,6 +17,8 @@ type
     TempoEmTela: TTimer;
     LIcone: TLabel;
     procedure FormCreate(Sender: TObject);
+    procedure FormMouseEnter(Sender: TObject);
+    procedure FormMouseLeave(Sender: TObject);
     procedure TempoEmTelaTimer(Sender: TObject);
 
   private
@@ -86,6 +88,16 @@ begin
 end;
 
 procedure TNotificacao.IniciarTimer;
+begin
+  TempoEmTela.Enabled := True;
+end;
+
+procedure TNotificacao.FormMouseEnter(Sender: TObject);
+begin
+  TempoEmTela.Enabled := False;
+end;
+
+procedure TNotificacao.FormMouseLeave(Sender: TObject);
 begin
   TempoEmTela.Enabled := True;
 end;

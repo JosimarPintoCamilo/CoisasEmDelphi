@@ -1,9 +1,9 @@
-unit Notificacoes.Notificacoes.NotificacaoFactory;
+unit Delphi.Notificacoes.NotificacaoFactory;
 
 interface
 
 uses
-  Notificacoes.Notificacoes.Notificacao;
+  Delphi.Notificacoes.Notificacao;
 
 type
   INotificacaoFactory = interface

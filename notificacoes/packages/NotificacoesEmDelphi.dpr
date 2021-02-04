@@ -3,10 +3,10 @@ program NotificacoesEmDelphi;
 uses
   Vcl.Forms,
   viewPrinciapal in '..\src\viewPrinciapal.pas' {Form1},
-  Notificacoes.Notificacoes.Impl.Notificacao in '..\src\notificacoes\impl\Notificacoes.Notificacoes.Impl.Notificacao.pas' {Notificacao},
-  Notificacoes.Notificacoes.Notificacao in '..\src\notificacoes\Notificacoes.Notificacoes.Notificacao.pas',
-  Notificacoes.Notificacoes.NotificacaoFactory in '..\src\notificacoes\Notificacoes.Notificacoes.NotificacaoFactory.pas',
-  Notificacoes.Notificacoes.Impl.NotificacaoFactory in '..\src\notificacoes\impl\Notificacoes.Notificacoes.Impl.NotificacaoFactory.pas';
+  Delphi.Notificacoes.Impl.Notificacao in '..\src\notificacoes\impl\Delphi.Notificacoes.Impl.Notificacao.pas' {Notificacao},
+  Delphi.Notificacoes.Notificacao in '..\src\notificacoes\Delphi.Notificacoes.Notificacao.pas',
+  Delphi.Notificacoes.NotificacaoFactory in '..\src\notificacoes\Delphi.Notificacoes.NotificacaoFactory.pas',
+  Delphi.Notificacoes.Impl.NotificacaoFactory in '..\src\notificacoes\impl\Delphi.Notificacoes.Impl.NotificacaoFactory.pas';
 
 {$R *.res}
 

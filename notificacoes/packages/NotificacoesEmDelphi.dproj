@@ -100,12 +100,12 @@
         <DCCReference Include="..\src\viewPrinciapal.pas">
             <Form>Form1</Form>
         </DCCReference>
-        <DCCReference Include="..\src\notificacoes\impl\Notificacoes.Notificacoes.Impl.Notificacao.pas">
+        <DCCReference Include="..\src\notificacoes\impl\Delphi.Notificacoes.Impl.Notificacao.pas">
             <Form>Notificacao</Form>
         </DCCReference>
-        <DCCReference Include="..\src\notificacoes\Notificacoes.Notificacoes.Notificacao.pas"/>
-        <DCCReference Include="..\src\notificacoes\Notificacoes.Notificacoes.NotificacaoFactory.pas"/>
-        <DCCReference Include="..\src\notificacoes\impl\Notificacoes.Notificacoes.Impl.NotificacaoFactory.pas"/>
+        <DCCReference Include="..\src\notificacoes\Delphi.Notificacoes.Notificacao.pas"/>
+        <DCCReference Include="..\src\notificacoes\Delphi.Notificacoes.NotificacaoFactory.pas"/>
+        <DCCReference Include="..\src\notificacoes\impl\Delphi.Notificacoes.Impl.NotificacaoFactory.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

@@ -1,12 +1,12 @@
-unit Notificacoes.Notificacoes.Impl.NotificacaoFactory;
+unit Delphi.Notificacoes.Impl.NotificacaoFactory;
 
 interface
 
 uses
   System.Generics.Collections,
-  Notificacoes.Notificacoes.Notificacao,
-  Notificacoes.Notificacoes.Impl.Notificacao,
-  Notificacoes.Notificacoes.NotificacaoFactory;
+  Delphi.Notificacoes.Notificacao,
+  Delphi.Notificacoes.Impl.Notificacao,
+  Delphi.Notificacoes.NotificacaoFactory;
 
 type
   TNotificacaoFactory = class(TInterfacedObject, INotificacaoFactory)

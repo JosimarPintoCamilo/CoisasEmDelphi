@@ -7,9 +7,9 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls,
   Vcl.ExtCtrls,
 
-  Notificacoes.Notificacoes.Notificacao,
-  Notificacoes.Notificacoes.NotificacaoFactory,
-  Notificacoes.Notificacoes.Impl.NotificacaoFactory;
+  Delphi.Notificacoes.Notificacao,
+  Delphi.Notificacoes.NotificacaoFactory,
+  Delphi.Notificacoes.Impl.NotificacaoFactory;
 
 type
   TForm1 = class(TForm)
